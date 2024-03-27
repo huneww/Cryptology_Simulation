@@ -1,16 +1,24 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class TotalEncryptionManager : MonoBehaviour
 {
     [SerializeField]
-    private MonoBehaviour[] encryptionWay;
+    private GameObject[] encryptionWay;
     [SerializeField]
     private TMP_Dropdown dropDown;
+    [SerializeField]
+    private List<WordNode> originalWord = new List<WordNode>();
 
     private void Awake()
     {
         UISetting();
+        for (int i = 0; i < originalWord.Count; i++)
+        {
+            originalWord[i].Word = Word.a + i;
+        }
     }
 
     private void UISetting()
@@ -20,9 +28,13 @@ public class TotalEncryptionManager : MonoBehaviour
         {
             foreach (var way in encryptionWay)
             {
-                way.gameObject.SetActive(false);
+                way.SetActive(false);
             }
-            encryptionWay[value].gameObject.SetActive(true);
+            if (value < encryptionWay.Length)
+            {
+                encryptionWay[value].gameObject.SetActive(true);
+            }
         });
     }
+
 }
