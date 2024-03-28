@@ -364,6 +364,8 @@
 "Assets/Scripts/MonoAlphabetic/MonoAlphabetic_Encryption.cs"
 "Assets/Scripts/test.cs"
 "Assets/Scripts/TotalEncryptionManager.cs"
+"Assets/Scripts/Vigenere/Vigenere_Encryption.cs"
+"Assets/Scripts/Vigenere/Vigenere_Sample.cs"
 "Assets/Scripts/WordNode.cs"
 -langversion:9.0
 

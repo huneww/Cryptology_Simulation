@@ -6,35 +6,28 @@ using System.Collections.Generic;
 public class MonoAlphabetic_Encryption : Encryption_Base
 {
     #region Open_Private_Fields
-    [Space(10), Header("MonoAlphabetic Fields")]
     [Tooltip("랜덤 시드 값")]
     [SerializeField]
-    private int seed = 0;
-
-    private int Seed
+    private int monoAlphabeticSeed
     {
         get
         {
-            return seed;
+            if (!PlayerPrefs.HasKey("monoAlphabeticSeed"))
+                return 0;
+            return PlayerPrefs.GetInt("monoAlphabeticSeed");
         }
         set
         {
-            int changeValue = Mathf.Clamp(value, int.MinValue, int.MaxValue);
+            // 값 저장
+            PlayerPrefs.SetInt("monoAlphabeticSeed", value);
+            // 치환표 갱신
             SetEncryptionWord();
-            if (!string.IsNullOrEmpty(inputField.text))
-            {
-                if (isEncryption)
-                {
-                    Encryption(inputField.text);
-                }
-                else
-                {
-                    Decryption(inputField.text);
-                }
-            }
+            // 시드값 텍스트 갱신
+            seedInputField.text = monoAlphabeticSeed.ToString();
         }
     }
 
+    [Space(10), Header("MonoAlphabetic Fields")]
     [Tooltip("랜덤 시드 값 인풋 필드")]
     [SerializeField]
     private TMP_InputField seedInputField;
@@ -47,16 +40,13 @@ public class MonoAlphabetic_Encryption : Encryption_Base
     #region MonoBehaviour_Callbacks
     private void Start()
     {
+        // UI 셋팅
         UISetting();
+        // Base클래스 UI 초기화 메서드 호출
+        base.UISetting();
     }
 
     private void OnEnable()
-    {
-        // 치환표 설정
-        SetEncryptionWord();
-    }
-
-    private void OnDisable()
     {
         // 치환표 설정
         SetEncryptionWord();
@@ -67,31 +57,30 @@ public class MonoAlphabetic_Encryption : Encryption_Base
     /// <summary>
     /// UI 셋팅
     /// </summary>
-    private void UISetting()
+    private new void UISetting()
     {
         // 랜덤 시드 값 임이의 값으로 설정
-        Random.InitState(seed);
+        Random.InitState(monoAlphabeticSeed);
 
         // 인풋 필드 입력 완료 이벤트 추가
         seedInputField.onEndEdit.AddListener(
             (text) =>
             {
-                Seed = Mathf.Clamp(int.Parse(text), int.MinValue, int.MaxValue);
+                monoAlphabeticSeed = Mathf.Clamp(int.Parse(text), int.MinValue, int.MaxValue);
             });
 
         // 시드 값 랜덤 버튼 이벤트 추가
         seedRandomBtn.onClick.AddListener(
             () =>
             {
-                Seed = Random.Range(int.MinValue, int.MaxValue);
-                seedInputField.text = Seed.ToString();
+                monoAlphabeticSeed = Random.Range(int.MinValue, int.MaxValue);
             });
     }
 
     /// <summary>
     /// UI 치환표 설정
     /// </summary>
-    private void SetEncryptionWord()
+    override public void SetEncryptionWord()
     {
         // 딕셔너리 초기화
         encryption.Clear();
@@ -107,6 +96,20 @@ public class MonoAlphabetic_Encryption : Encryption_Base
                 wordList[i].Word = (Word)code;
                 // i값 증가
                 i++;
+            }
+        }
+
+        // 입력값 있는지 확인
+        if (!string.IsNullOrEmpty(inputField.text))
+        {
+            // 입력값 갱신
+            if (isEncryption)
+            {
+                Encryption(inputField.text);
+            }
+            else
+            {
+                Decryption(inputField.text);
             }
         }
     }

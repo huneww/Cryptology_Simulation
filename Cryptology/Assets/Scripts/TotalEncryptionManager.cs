@@ -15,14 +15,15 @@ public class TotalEncryptionManager : MonoBehaviour
     private void Awake()
     {
         UISetting();
-        for (int i = 0; i < originalWord.Count; i++)
-        {
-            originalWord[i].Word = Word.a + i;
-        }
     }
 
     private void UISetting()
     {
+        for (int i = 0; i < originalWord.Count; i++)
+        {
+            originalWord[i].Word = Word.a + i;
+        }
+
         dropDown.onValueChanged.AddListener(
         (value) =>
         {

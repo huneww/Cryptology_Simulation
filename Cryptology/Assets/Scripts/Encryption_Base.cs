@@ -5,7 +5,7 @@ using TMPro;
 using System.Text;
 using System.Linq;
 
-public class Encryption_Base : MonoBehaviour
+public abstract class Encryption_Base : MonoBehaviour
 {
     #region Open_Private_Field
     [Header("Base Fields")]
@@ -48,69 +48,7 @@ public class Encryption_Base : MonoBehaviour
     #endregion
 
     #region MonoBehaviour_Callbacks
-    private void Awake()
-    {
-        // 원본 알파벳 저장
-        for (int i = 0; i < 26; i++)
-        {
-            original.Add((char)('a' + i));
-        }
 
-        // 도움말 여는 버튼 이벤트 추가
-        explainOpenBtn.onClick.AddListener(
-            () =>
-            {
-                explain.SetActive(true);
-            });
-
-        // 도움말 닫는 버튼 이벤트 추가
-        explainCloseBtn.onClick.AddListener(
-            () =>
-            {
-                explain.SetActive(false);
-            });
-
-        // 유저 입력 완료 이벤트 추가
-        inputField.onEndEdit.AddListener(
-            (text) =>
-            {
-                // 암호화
-                if (isEncryption)
-                {
-                    Encryption(text);
-                }
-                // 해독
-                else
-                {
-                    Decryption(text);
-                }
-            });
-
-        // 암호화 인지 해독인지 확인 토글 이벤트 추가
-        toggle.onValueChanged.AddListener(
-            (value) =>
-            {
-                isEncryption = value;
-                if (value)
-                {
-                    toggle.GetComponentInChildren<TextMeshProUGUI>().text = "Encryption";
-                    // 기존에 입력한 값이 있다면 암호화
-                    if (!string.IsNullOrEmpty(inputField.text))
-                    {
-                        Encryption(inputField.text);
-                    }
-                }
-                else
-                {
-                    toggle.GetComponentInChildren<TextMeshProUGUI>().text = "Decryption";
-                    // 기존에 입력한 값이 있다면 복호화
-                    if (!string.IsNullOrEmpty(inputField.text))
-                    {
-                        Decryption(inputField.text);
-                    }
-                }
-            });
-    }
     private void OnEnable()
     {
         if (!string.IsNullOrEmpty(inputField.text))
@@ -119,7 +57,7 @@ public class Encryption_Base : MonoBehaviour
             {
                 Encryption(inputField.text);
             }
-            else;
+            else
             {
                 Decryption(inputField.text);
             }
@@ -202,6 +140,77 @@ public class Encryption_Base : MonoBehaviour
         }
         outputField.text = sb.ToString();
     }
+
+    /// <summary>
+    /// UI 셋팅
+    /// </summary>
+    protected void UISetting()
+    {
+        // 원본 알파벳 저장
+        for (int i = 0; i < 26; i++)
+        {
+            original.Add((char)('a' + i));
+        }
+
+        // 도움말 여는 버튼 이벤트 추가
+        explainOpenBtn.onClick.AddListener(
+            () =>
+            {
+                explain.SetActive(true);
+            });
+
+        // 도움말 닫는 버튼 이벤트 추가
+        explainCloseBtn.onClick.AddListener(
+            () =>
+            {
+                explain.SetActive(false);
+            });
+
+        // 유저 입력 완료 이벤트 추가
+        inputField.onEndEdit.AddListener(
+            (text) =>
+            {
+                // 암호화
+                if (isEncryption)
+                {
+                    Encryption(text);
+                }
+                // 해독
+                else
+                {
+                    Decryption(text);
+                }
+            });
+
+        // 암호화 인지 해독인지 확인 토글 이벤트 추가
+        toggle.onValueChanged.AddListener(
+            (value) =>
+            {
+                isEncryption = value;
+                if (value)
+                {
+                    toggle.GetComponentInChildren<TextMeshProUGUI>().text = "Encryption";
+                    // 기존에 입력한 값이 있다면 암호화
+                    if (!string.IsNullOrEmpty(inputField.text))
+                    {
+                        Encryption(inputField.text);
+                    }
+                }
+                else
+                {
+                    toggle.GetComponentInChildren<TextMeshProUGUI>().text = "Decryption";
+                    // 기존에 입력한 값이 있다면 복호화
+                    if (!string.IsNullOrEmpty(inputField.text))
+                    {
+                        Decryption(inputField.text);
+                    }
+                }
+            });
+    }
+    #endregion
+
+    #region Abstract_Methods
+    public abstract void SetEncryptionWord();
     #endregion
 
 }
