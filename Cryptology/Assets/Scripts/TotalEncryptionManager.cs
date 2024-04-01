@@ -15,6 +15,19 @@ public class TotalEncryptionManager : MonoBehaviour
     private void Awake()
     {
         UISetting();
+        DropDownOptionAdd();
+    }
+
+    private void DropDownOptionAdd()
+    {
+        dropDown.ClearOptions();
+        List<string> dropDownGroup = new List<string>();
+        foreach (var way in encryptionWay)
+        {
+            string[] str = way.name.Split("_");
+            dropDownGroup.Add(str[0]);
+        }
+        dropDown.AddOptions(dropDownGroup);
     }
 
     private void UISetting()

@@ -43,10 +43,6 @@ public class Caesare_Encryption : Encryption_Base
         UISetting();
         // Base클래스 UI 초기화 메서드 호출
         base.UISetting();
-    }
-
-    private void OnEnable()
-    {
         // 치환표 설정
         SetEncryptionWord();
     }

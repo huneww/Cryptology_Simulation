@@ -70,7 +70,7 @@ public abstract class Encryption_Base : MonoBehaviour
     /// 평문을 암호문으로 변경
     /// </summary>
     /// <param name="originalText">암호화할 평문</param>
-    protected void Encryption(string originalText)
+    public virtual void Encryption(string originalText)
     {
         StringBuilder sb = new StringBuilder();
 
@@ -106,7 +106,7 @@ public abstract class Encryption_Base : MonoBehaviour
     /// 암호문을 평문으로 변경
     /// </summary>
     /// <param name="encryptionText">복호화할 암호문</param>
-    protected void Decryption(string encryptionText)
+    public virtual void Decryption(string encryptionText)
     {
         StringBuilder sb = new StringBuilder();
 
