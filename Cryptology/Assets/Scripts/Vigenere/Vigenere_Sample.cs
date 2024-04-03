@@ -8,6 +8,7 @@ public class Vigenere_Sample : MonoBehaviour
 {
     public Vigenere_Encryption encryption;
 
+    #region Open_Private_Fields
     [SerializeField]
     private TextMeshProUGUI sampleText;
     [SerializeField]
@@ -18,12 +19,16 @@ public class Vigenere_Sample : MonoBehaviour
     private TextMeshProUGUI plusTextInt;
     [SerializeField]
     private TextMeshProUGUI encryptionText;
+    #endregion
 
+    #region MonoBehaviour_Callbacks
     private void Awake()
     {
         encryption.sampleTextUpdate = SampleTextUpdate;
     }
+    #endregion
 
+    #region Custom_Methods
     /// <summary>
     /// 샘플 텍스트 업데이트
     /// </summary>
@@ -161,5 +166,5 @@ public class Vigenere_Sample : MonoBehaviour
 
         encryptionText.text = sb.ToString();
     }
-
+    #endregion
 }

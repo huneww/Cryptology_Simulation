@@ -5,27 +5,16 @@ using System.Collections.Generic;
 
 public class test : MonoBehaviour
 {
-    public List<int> testList = new List<int>();
+    public TMP_InputField inputField;
 
     private void Start()
     {
-        for (int i = 0; i < 26;)
-        {
-            bool check = true;
-            int value = Random.Range(97, 123);
-            foreach (int list in testList)
-            {
-                if (list == value)
-                {
-                    check = false;
-                    break;
-                }
-            }
-            if (check)
-            {
-                testList.Add(value);
-                i++;
-            }
-        }
+        
     }
+
+    private void Update()
+    {
+        
+    }
+
 }
