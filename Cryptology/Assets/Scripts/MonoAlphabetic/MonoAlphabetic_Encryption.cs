@@ -57,7 +57,7 @@ public class MonoAlphabetic_Encryption : Encryption_Base
     /// <summary>
     /// UI 셋팅
     /// </summary>
-    private new void UISetting()
+    public override void UISetting()
     {
         // 랜덤 시드 값 임이의 값으로 설정
         Random.InitState(monoAlphabeticSeed);

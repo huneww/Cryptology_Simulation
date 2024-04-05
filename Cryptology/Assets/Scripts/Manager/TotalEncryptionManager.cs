@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
@@ -14,6 +13,7 @@ public class TotalEncryptionManager : MonoBehaviour
 
     private void Awake()
     {
+        Screen.SetResolution(1280, 720, false);
         UISetting();
         DropDownOptionAdd();
     }

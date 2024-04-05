@@ -43,13 +43,31 @@ public class PlugBoard : MonoBehaviour
     /// <returns>찾지 못하면 null을 반환</returns>
     public Plug GetPlug(string text)
     {
+        Plug returnPlug = null;
+
         foreach (Plug plug in plugList)
         {
             if (plug.InText == text)
             {
-                return plug;
+                returnPlug = plug;
             }
         }
-        return null;
+        return returnPlug;
     }
+
+    public string GetText(string text)
+    {
+        string returnText = string.Empty;
+
+        foreach (Plug plug in plugList)
+        {
+            if (plug.InText == text)
+            {
+                returnText = plug.OutString;
+            }
+        }
+
+        return returnText;
+    }
+
 }

@@ -144,7 +144,7 @@ public abstract class Encryption_Base : MonoBehaviour
     /// <summary>
     /// UI 셋팅
     /// </summary>
-    protected void UISetting()
+    public virtual void UISetting()
     {
         // 원본 알파벳 저장
         for (int i = 0; i < 26; i++)
@@ -207,10 +207,12 @@ public abstract class Encryption_Base : MonoBehaviour
                 }
             });
     }
-    #endregion
 
-    #region Abstract_Methods
-    public abstract void SetEncryptionWord();
+    public virtual void SetEncryptionWord()
+    {
+
+    }
+
     #endregion
 
 }
