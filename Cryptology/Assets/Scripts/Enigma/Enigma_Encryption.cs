@@ -15,10 +15,10 @@ public class Enigma_Encryption : Encryption_Base
     private Button plugBoardBtn;
     [Tooltip("로터 보드 설정 창")]
     [SerializeField]
-    private GameObject roaterObj;
+    private GameObject rotorObj;
     [Tooltip("로터 보드 버튼")]
     [SerializeField]
-    private Button roaterBtn;
+    private Button rotorBtn;
 
     private PlugBoard plugBoard;
 
@@ -49,14 +49,14 @@ public class Enigma_Encryption : Encryption_Base
         plugBoardBtn.onClick.AddListener(
             () =>
             {
-                roaterObj.SetActive(false);
+                rotorObj.SetActive(false);
                 plugBoardObj.SetActive(true);
             });
 
-        roaterBtn.onClick.AddListener(
+        rotorBtn.onClick.AddListener(
             () =>
             {
-                roaterObj.SetActive(true);
+                rotorObj.SetActive(true);
                 plugBoardObj.SetActive(false);
             });
 

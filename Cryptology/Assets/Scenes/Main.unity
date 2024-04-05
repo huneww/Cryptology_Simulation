@@ -2033,8 +2033,8 @@ MonoBehaviour:
   toggle: {fileID: 1106000778}
   plugBoardObj: {fileID: 1041625887}
   plugBoardBtn: {fileID: 336862198}
-  roaterObj: {fileID: 694218555}
-  roaterBtn: {fileID: 1831245645}
+  rotorObj: {fileID: 694218555}
+  rotorBtn: {fileID: 1831245645}
 --- !u!1 &134617875
 GameObject:
   m_ObjectHideFlags: 0

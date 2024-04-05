@@ -61,11 +61,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\MonoAlphabetic\MonoAlphabetic_Encryption.cs" />
+    <Compile Include="Assets\Scripts\Enigma\Roter\Roter.cs" />
+    <Compile Include="Assets\Scripts\Enigma\Roter\Roter_Group.cs" />
     <Compile Include="Assets\Scripts\Manager\TotalEncryptionManager.cs" />
     <Compile Include="Assets\Scripts\Enigma\Enigma_Encryption.cs" />
     <Compile Include="Assets\Scripts\test.cs" />
     <Compile Include="Assets\Scripts\Caesare\Caesare_Encryption.cs" />
     <Compile Include="Assets\Scripts\Base\Encryption_Base.cs" />
+    <Compile Include="Assets\Scripts\Enigma\Roter\Reflector.cs" />
     <Compile Include="Assets\Scripts\Enigma\Plug.cs" />
     <Compile Include="Assets\Scripts\Vigenere\Vigenere_Sample.cs" />
     <Compile Include="Assets\Scripts\Node\WordNode.cs" />
