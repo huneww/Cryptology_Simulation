@@ -22386,7 +22386,7 @@
         "Assets/Scripts/Enigma/PlugBoard.cs",
         "Assets/Scripts/Enigma/Roter/Reflector.cs",
         "Assets/Scripts/Enigma/Roter/Roter.cs",
-        "Assets/Scripts/Enigma/Roter/Roter_Group.cs",
+        "Assets/Scripts/Enigma/Roter/Rotor_Group.cs",
         "Assets/Scripts/Manager/TotalEncryptionManager.cs",
         "Assets/Scripts/MonoAlphabetic/MonoAlphabetic_Encryption.cs",
         "Assets/Scripts/Node/WordNode.cs",

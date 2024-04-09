@@ -21,11 +21,13 @@ public class Enigma_Encryption : Encryption_Base
     private Button rotorBtn;
 
     private PlugBoard plugBoard;
+    private Rotor_Group rotor;
 
     private void Awake()
     {
         UISetting();
         plugBoard = plugBoardObj.GetComponent<PlugBoard>();
+        rotor = rotorObj.GetComponent<Rotor_Group>();
     }
 
     private void OnEnable()
@@ -102,32 +104,7 @@ public class Enigma_Encryption : Encryption_Base
         inputField.onValueChanged.AddListener(
             (text) =>
             {
-                if (!string.IsNullOrEmpty(text))
-                {
-                    // 입력 텍스트의 맨마지막 값 획득
-                    int lastIndex = text.Length - 1;
-                    // 마지막 텍스트 대문자로 변경
-                    string upperText = text[lastIndex].ToString().ToUpper();
-                    // 얻은 텍스트를 플러그보드를 통해 아웃풋 값을 획득
-                    string returnText = plugBoard.GetText(upperText);
-
-                    StringBuilder sb = new StringBuilder();
-                    // 입력 텍스트의 길이가 아웃풋의 텍스트의 길이보다 길때
-                    // 짧으면 유저가 입력 텍스트를 지운것
-                    if (text.Length > outputField.text.Length)
-                    {
-                        // 아웃풋에 있는 텍스트를 추가
-                        sb.Append(outputField.text);
-                        // 입력 텍스트의 마지막 값을 소문자로 추가
-                        sb.Append(returnText.ToLower());
-                    }
-                    else
-                    {
-                        // 지워진 텍스트만 추가
-                        sb.Append(text);
-                    }
-                    outputField.text = sb.ToString();
-                }
+                InputFieldEvent(text);
             });
     }
 
@@ -139,6 +116,44 @@ public class Enigma_Encryption : Encryption_Base
     public override void Decryption(string encryptionText)
     {
         base.Decryption(encryptionText);
+    }
+
+    private void InputFieldEvent(string text)
+    {
+        if (!string.IsNullOrEmpty(text))
+        {
+            StringBuilder sb = new StringBuilder();
+
+            // 입력 텍스트의 길이가 아웃풋의 텍스트의 길이보다 길때
+            // 짧으면 유저가 입력 텍스트를 1개 지운것
+            if (text.Length > outputField.text.Length)
+            {
+                // 입력 텍스트의 맨마지막 인덱스 값 획득
+                int lastIndex = text.Length - 1;
+                // 마지막 텍스트 대문자로 변경
+                string upperText = text[lastIndex].ToString().ToUpper();
+                // 얻은 텍스트를 플러그보드를 통해 아웃풋 값을 획득
+                string plugText = plugBoard.GetText(upperText);
+                // 로터 순회
+                char roterText = rotor.RoterAction(plugText);
+                // 다시 한번 플러그 보드 확인
+                string returnText = plugBoard.GetText(roterText.ToString());
+                // 아웃풋에 있는 텍스트를 추가
+                sb.Append(outputField.text);
+                // 입력 텍스트의 마지막 값을 소문자로 추가
+                sb.Append(returnText.ToLower());
+            }
+            else
+            {
+                // 입력 텍스트의 길이만큼 반복
+                for (int i = 0; i < text.Length; i++)
+                {
+                    // 변경된 아웃풋필드의 글자를 추가
+                    sb.Append(outputField.text[i]);
+                }
+            }
+            outputField.text = sb.ToString();
+        }
     }
 
 }
