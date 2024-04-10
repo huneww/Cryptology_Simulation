@@ -140,6 +140,7 @@ public class Roter : MonoBehaviour
     /// <returns>cuurentRatchet에서 ratchet을 나눈 나머지가 0이라면 다음 로터도 변경할지 확인</returns>
     public bool ChangeConnectList()
     {
+        Debug.Log(gameObject.name);
         // 리스트의 첫번째의 연결된 문자만 임시 저장
         char temporay = (char)roterConnectList[0].CopyConnect();
         // 리스트 순회
@@ -162,8 +163,10 @@ public class Roter : MonoBehaviour
         currentRatchet++;
         // 라쳇의 위치가 26보다 크다면
         currentRatchet = currentRatchet > 26 ? currentRatchet - 26 : currentRatchet;
+        // UI 텍스트 적용
+        currentText.text = currentRatchet.ToString();
         // 다음 로터도 이동시킬지 확인
-        bool answer = currentRatchet % ratchetTrigger == 0;
+        bool answer = ratchetTrigger % currentRatchet == 0;
         // 이동 여부 반환
         return answer;
     }

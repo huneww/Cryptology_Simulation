@@ -29,18 +29,22 @@ public class Vigenere_Encryption : Encryption_Base
     #endregion
 
     #region Private_Fields
+    private string vigenereKey = "love";
     // 키 값 문자열
     private string VigenereKey
     {
         get
         {
-            if (!PlayerPrefs.HasKey("VigenereKey"))
-                return "love";
-            return PlayerPrefs.GetString("VigenereKey");
+            if (string.IsNullOrEmpty(vigenereKey))
+            {
+                vigenereKey = "love";
+                return vigenereKey;
+            }
+            return vigenereKey;
         }
         set
         {
-            PlayerPrefs.SetString("VigenereKey", value);
+            vigenereKey = value;
             // 텍스트 값 변경
             keyInputField.text = value;
             // 치환표 갱신
@@ -210,14 +214,14 @@ public class Vigenere_Encryption : Encryption_Base
 
     public override void Encryption(string originalText)
     {
-        Debug.Log("override Encryption");
-        // 입력 값의 벨류값 저장
-        int[] originalTextValue = new int[originalText.Length];
         // 암호화한 문자열 제작 StringBuilder
         StringBuilder sb = new StringBuilder();
 
         // 입력값 소문자로 변환
         string lowerText = originalText.ToLower();
+
+        // 입력 값의 벨류값 저장
+        int[] originalTextValue = new int[originalText.Length];
 
         // 입력값의 벨류값 저장
         for (int i = 0; i < originalText.Length; i++)
@@ -229,16 +233,25 @@ public class Vigenere_Encryption : Encryption_Base
         // 암호화
         for (int i = 0; i < originalText.Length; i++)
         {
-            int index = i % VigenereKey.Length;
-            int sum = originalTextValue[i] + keyTextValue[index];
-            if (sum > 26)
+            // 텍스트가 알파벳인지 확인
+            if (originalText[i] >= 'a' && originalText[i] <= 'z')
             {
-                sum -= 26;
+                int index = i % VigenereKey.Length;
+                int sum = originalTextValue[i] + keyTextValue[index];
+                if (sum > 26)
+                {
+                    sum -= 26;
+                }
+                // 합값 알파벳으로 변경
+                char ch = (char)(sum + 96);
+                Debug.Log($"{sum}, {ch}");
+                sb.Append(ch.ToString());
             }
-            // 합값 알파벳으로 변경
-            char ch = (char)(sum + 96);
-            Debug.Log($"{sum}, {ch}");
-            sb.Append(ch.ToString());
+            // 특수문자, 띄어쓰기 라면 그대로 추가
+            else
+            {
+                sb.Append(originalText[i]);
+            }
         }
 
         // 아웃풋 필드의 텍스트 적용
@@ -248,7 +261,6 @@ public class Vigenere_Encryption : Encryption_Base
 
     public override void Decryption(string encryptionText)
     {
-        Debug.Log("override Decryption");
         // 입력 값의 벨류값 저장
         int[] encryptionTextValue = new int[encryptionText.Length];
         // 암호화한 문자열 제작 StringBuilder

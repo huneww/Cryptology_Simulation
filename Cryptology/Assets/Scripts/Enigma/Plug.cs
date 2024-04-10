@@ -8,42 +8,49 @@ using System;
 
 public class Plug : MonoBehaviour
 {
+    #region Open_Private_Fields
     [Tooltip("아웃풋 선택 드랍다운")]
     [SerializeField]
     private TMP_Dropdown outText;
     [Tooltip("인풋 확인")]
     [SerializeField]
-    private string inText;
+    private char inText;
     [Tooltip("연결된 Plug")]
     [SerializeField]
     private Plug connectedText;
-    public string InText
+    [SerializeField]
+    private PlugBoard plugBoard;
+    #endregion
+
+    #region Property_Fields
+    public char InText
     {
         get
         {
             return inText;
         }
     }
-
-    [HideInInspector]
-    public string OutString
+    public char OutText
     {
         get
         {
-            return outText.options[outText.value].text;
+            string text = outText.options[outText.value].text;
+            char returnText = char.Parse(text);
+            return returnText;
         }
     }
+    #endregion
 
-    PlugBoard plugBoard;
-
-
+    #region Custom_Methods
+    /// <summary>
+    ///  플러그 초기화 메서드
+    /// </summary>
+    /// <param name="inText">플러그의 초기화할 알파벳</param>
     public void Init(char inText)
     {
-        // 플러그 보드를 획득
-        plugBoard = GetComponentInParent<PlugBoard>();
 
         // 인풋 텍스트 초기화
-        this.inText = inText.ToString();
+        this.inText = inText;
         // 초기 연결 Plug는 자기자신으로 초기화
         connectedText = this;
 
@@ -69,7 +76,7 @@ public class Plug : MonoBehaviour
         // 드랍다운 벨류값 게임씬에 적용
         // 메소드 호출하지 않으면 벨류값이 미반영
         // outText.RefreshShownValue(); // 이 메서드로 하면 지정한 이벤트가 호출됨
-        // 지정한 이벤트가 호출되지 않음
+        // 지정한 이벤트가 호출되지 않음, 벨류값도 같이 바뀌게 됨
         outText.SetValueWithoutNotify(outText.value);
         // 드랍다운 벨류값 변경시 이벤트 추가
         outText.onValueChanged.AddListener(
@@ -92,21 +99,20 @@ public class Plug : MonoBehaviour
     {
         if (connectedText == this)
         {
-            string text = outText.options[value].text;
+            char text = char.Parse(outText.options[value].text);
             connectedText = plugBoard.GetPlug(text);
             outText.SetValueWithoutNotify(value);
 
             if (!isConnected)
             {
-                char ch = char.Parse(inText);
-                int charToInt = ch - 'A';
+                int charToInt = inText - 'A';
                 StartCoroutine(connectedText.ConnectedTextChange(charToInt, true));
             }
         }
         else
         {
             // 연결할 플러그 획득
-            string text = outText.options[value].text;
+            char text = char.Parse(outText.options[value].text);
             Plug newcon = plugBoard.GetPlug(text);
 
             // 새롭게 연결할 플로그가 자기자신이라면
@@ -137,8 +143,7 @@ public class Plug : MonoBehaviour
                 // newcon의 연결상태도 갱신
                 if (!isConnected)
                 {
-                    char ch = char.Parse(inText);
-                    int charToInt = ch - 'A';
+                    int charToInt = inText - 'A';
                     StartCoroutine(connectedText.ConnectedTextChange(charToInt, true));
                 }
             }
@@ -155,10 +160,11 @@ public class Plug : MonoBehaviour
     private void ConnectedTextReset(Plug resetPlug)
     {
         resetPlug.connectedText = resetPlug;
-        char ch = char.Parse(resetPlug.InText);
+        char ch = resetPlug.InText;
         int charToInt = ch - 'A';
         TMP_Dropdown dropdown = resetPlug.GetComponentInChildren<TMP_Dropdown>();
         dropdown.SetValueWithoutNotify(charToInt);
     }
+    #endregion
 
 }

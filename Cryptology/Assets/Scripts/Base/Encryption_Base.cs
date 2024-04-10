@@ -21,18 +21,6 @@ public abstract class Encryption_Base : MonoBehaviour
     [SerializeField]
     protected TMP_InputField outputField;
 
-    [Tooltip("도움말 여는 버튼")]
-    [SerializeField]
-    protected Button explainOpenBtn;
-
-    [Tooltip("도움말 닫는 버튼")]
-    [SerializeField]
-    protected Button explainCloseBtn;
-
-    [Tooltip("도움말")]
-    [SerializeField]
-    protected GameObject explain;
-
     [Tooltip("스위칭 토글")]
     [SerializeField]
     protected Toggle toggle;
@@ -51,6 +39,8 @@ public abstract class Encryption_Base : MonoBehaviour
 
     private void OnEnable()
     {
+        // 활성화시 인풋필드의 값이 있다면
+        // 값 변경
         if (!string.IsNullOrEmpty(inputField.text))
         {
             if (isEncryption)
@@ -152,20 +142,6 @@ public abstract class Encryption_Base : MonoBehaviour
             original.Add((char)('a' + i));
         }
 
-        // 도움말 여는 버튼 이벤트 추가
-        explainOpenBtn.onClick.AddListener(
-            () =>
-            {
-                explain.SetActive(true);
-            });
-
-        // 도움말 닫는 버튼 이벤트 추가
-        explainCloseBtn.onClick.AddListener(
-            () =>
-            {
-                explain.SetActive(false);
-            });
-
         // 유저 입력 완료 이벤트 추가
         inputField.onEndEdit.AddListener(
             (text) =>
@@ -210,7 +186,7 @@ public abstract class Encryption_Base : MonoBehaviour
 
     public virtual void SetEncryptionWord()
     {
-
+        Debug.Log("Call Encryption_Base.SetEncryptionWord, This not working");
     }
 
     #endregion
