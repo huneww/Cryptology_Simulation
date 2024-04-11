@@ -4,29 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-[System.Serializable]
-public class RoterConnect
-{
-    // 입력 문자
-    public char name;
-    // 입력 문자와 연결된 문자
-    public char connect;
-
-    public RoterConnect(char name, char connect)
-    {
-        this.name = name;
-        this.connect = connect;
-    }
-
-    // 깊은 복사(연결된 문자만)
-    public char CopyConnect()
-    {
-        char clone = this.connect;
-
-        return clone;
-    }
-}
-
 public class Roter : MonoBehaviour
 {
     [SerializeField]
@@ -60,7 +37,7 @@ public class Roter : MonoBehaviour
 
     [SerializeField]
     [Tooltip("알파벳 연결 리시트")]
-    private List<RoterConnect> roterConnectList = new List<RoterConnect>();
+    private List<char> roterConnectList = new List<char>();
 
     private void Awake()
     {
@@ -97,6 +74,7 @@ public class Roter : MonoBehaviour
                 currentRatchet++;
                 currentRatchet %= 26;
                 currentText.text = currentRatchet.ToString();
+                RatchetButtonEvent(true);
             });
         ratchetDownBtn.onClick.AddListener(
             () =>
@@ -104,7 +82,30 @@ public class Roter : MonoBehaviour
                 currentRatchet--;
                 currentRatchet = currentRatchet <= 0 ? 26 : currentRatchet;
                 currentText.text = currentRatchet.ToString();
+                RatchetButtonEvent(false);
             });
+    }
+
+    private void RatchetButtonEvent(bool isUp)
+    {
+        if (isUp)
+        {
+            // 마지막 값 저장
+            char temporay = roterConnectList[roterConnectList.Count - 1];
+            // 리스트에서 마지막 값 제거
+            roterConnectList.RemoveAt(roterConnectList.Count - 1);
+            // 마지막 값을 리스트의 맨 앞에 추가
+            roterConnectList.Insert(0, temporay);
+        }
+        else
+        {
+            // 첫번째 값 저장
+            char temporay = roterConnectList[0];
+            // 리스트에서 첫번째 값 제거
+            roterConnectList.RemoveAt(0);
+            // 첫번째 값을 리스트 맨 마지막에 추가
+            roterConnectList.Add(temporay);
+        }
     }
 
     /// <summary>
@@ -117,18 +118,7 @@ public class Roter : MonoBehaviour
         // 연결된 문자 저장 변수
         char connect = new char();
 
-        // 리스트를 순회
-        foreach (RoterConnect roter in roterConnectList)
-        {
-            // 동일한 이름을 가진 문자 획득
-            if (roter.name == name)
-            {
-                // 동일한 문자의 연결된 문자를 저장
-                connect = roter.connect;
-                // 반복문 종료
-                break;
-            }
-        }
+        connect = roterConnectList[name - 'A'];
 
         // 연결된 문자 반환
         return connect;
@@ -140,24 +130,8 @@ public class Roter : MonoBehaviour
     /// <returns>cuurentRatchet에서 ratchet을 나눈 나머지가 0이라면 다음 로터도 변경할지 확인</returns>
     public bool ChangeConnectList()
     {
-        Debug.Log(gameObject.name);
-        // 리스트의 첫번째의 연결된 문자만 임시 저장
-        char temporay = (char)roterConnectList[0].CopyConnect();
-        // 리스트 순회
-        for (int i = 1; i < roterConnectList.Count; i++)
-        {
-            // 리스트의 마지막이라면
-            if (i == roterConnectList.Count - 1)
-            {
-                // 리스트의 첫번째를 저장
-                roterConnectList[i].connect = temporay;
-            }
-            else
-            {
-                // 리스트 깊은 복사
-                roterConnectList[i - 1].connect = (char)roterConnectList[i].CopyConnect();
-            }
-        }
+        // 연결 갱신
+        RatchetButtonEvent(true);
 
         // 현재 라쳇 위치 증가
         currentRatchet++;

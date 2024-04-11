@@ -1,118 +1,41 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
 
-public class MonoAlphabetic_Encryption : Encryption_Base
+public class MonoAlphabetic_Encryption : MonoBehaviour, IEncryption
 {
-    #region Open_Private_Fields
-    [Tooltip("랜덤 시드 값")]
-    [SerializeField]
-    private int monoAlphabeticSeed
+    public string Encryption(string originalText, Dictionary<char, char> words)
     {
-        get
+        StringBuilder sb = new StringBuilder();
+
+        foreach (char text in originalText)
         {
-            if (!PlayerPrefs.HasKey("monoAlphabeticSeed"))
-                return 0;
-            return PlayerPrefs.GetInt("monoAlphabeticSeed");
-        }
-        set
-        {
-            // 값 저장
-            PlayerPrefs.SetInt("monoAlphabeticSeed", value);
-            // 치환표 갱신
-            SetEncryptionWord();
-            // 시드값 텍스트 갱신
-            seedInputField.text = monoAlphabeticSeed.ToString();
-        }
-    }
-
-    [Space(10), Header("MonoAlphabetic Fields")]
-    [Tooltip("랜덤 시드 값 인풋 필드")]
-    [SerializeField]
-    private TMP_InputField seedInputField;
-
-    [Tooltip("랜덤 시드 값 랜덤 변경 버튼")]
-    [SerializeField]
-    private Button seedRandomBtn;
-    #endregion;
-
-    #region MonoBehaviour_Callbacks
-    private void Start()
-    {
-        // UI 셋팅
-        UISetting();
-        // Base클래스 UI 초기화 메서드 호출
-        base.UISetting();
-    }
-
-    private void OnEnable()
-    {
-        // 치환표 설정
-        SetEncryptionWord();
-    }
-    #endregion
-
-    #region Custom_Methods
-    /// <summary>
-    /// UI 셋팅
-    /// </summary>
-    public override void UISetting()
-    {
-        // 랜덤 시드 값 임이의 값으로 설정
-        Random.InitState(monoAlphabeticSeed);
-
-        // 인풋 필드 입력 완료 이벤트 추가
-        seedInputField.onEndEdit.AddListener(
-            (text) =>
+            // 대문자
+            if (text >= 65 && text <= 97)
             {
-                monoAlphabeticSeed = Mathf.Clamp(int.Parse(text), int.MinValue, int.MaxValue);
-            });
-
-        // 시드 값 랜덤 버튼 이벤트 추가
-        seedRandomBtn.onClick.AddListener(
-            () =>
-            {
-                monoAlphabeticSeed = Random.Range(int.MinValue, int.MaxValue);
-            });
-    }
-
-    /// <summary>
-    /// UI 치환표 설정
-    /// </summary>
-    override public void SetEncryptionWord()
-    {
-        // 딕셔너리 초기화
-        encryption.Clear();
-        for (int i = 0; i < 26;)
-        {
-            // 아스키 코드 값을 이용해서 랜덤한 알파벳 획득
-            // Random의 시드값을 지정하여서 동일한 값이 계속해서 나올것
-            int code = Random.Range(97, 123);
-            // 추가에 성공하면
-            if (encryption.TryAdd((char)('a' + i), (char)(code)))
-            {
-                // 치환표의 글자 변경
-                wordList[i].Word = (Word)code;
-                // i값 증가
-                i++;
+                // 소문자로 변경
+                char lowerText = (char)(text + 32);
+                // 소문자 값 획득
+                char encryptionText = words[lowerText];
+                // 획득한 소문자를 대문자로 변경
+                encryptionText = (char)(encryptionText - 32);
+                // sb에 추가
+                sb.Append(encryptionText);
             }
-        }
-
-        // 입력값 있는지 확인
-        if (!string.IsNullOrEmpty(inputField.text))
-        {
-            // 입력값 갱신
-            if (isEncryption)
+            // 소문자
+            else if (text >= 97 && text <= 122)
             {
-                Encryption(inputField.text);
+                // 대문자로 변경
+                char upperText = (char)(text - 32);
+                sb.Append(words[text]);
             }
+            // 그외의 특수 문자
             else
             {
-                Decryption(inputField.text);
+                sb.Append(text);
             }
         }
+        return sb.ToString();
     }
-    #endregion
-
 }

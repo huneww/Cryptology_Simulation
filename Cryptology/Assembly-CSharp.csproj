@@ -60,19 +60,27 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Enigma\Enigma_Cryptology.cs" />
     <Compile Include="Assets\Scripts\MonoAlphabetic\MonoAlphabetic_Encryption.cs" />
     <Compile Include="Assets\Scripts\Enigma\Roter\Rotor_Group.cs" />
     <Compile Include="Assets\Scripts\Enigma\Roter\Roter.cs" />
-    <Compile Include="Assets\Scripts\Manager\TotalEncryptionManager.cs" />
-    <Compile Include="Assets\Scripts\Enigma\Enigma_Encryption.cs" />
+    <Compile Include="Assets\Scripts\Vigenere\Vigenere_Cryptology.cs" />
+    <Compile Include="Assets\Scripts\Caesare\Caesare_Cryptology.cs" />
     <Compile Include="Assets\Scripts\test.cs" />
     <Compile Include="Assets\Scripts\Caesare\Caesare_Encryption.cs" />
-    <Compile Include="Assets\Scripts\Base\Encryption_Base.cs" />
     <Compile Include="Assets\Scripts\Enigma\Roter\Reflector.cs" />
+    <Compile Include="Assets\Scripts\Interface\IEncryption.cs" />
+    <Compile Include="Assets\Scripts\Caesare\Caesare_Decryption.cs" />
+    <Compile Include="Assets\Scripts\Interface\IDecryption.cs" />
+    <Compile Include="Assets\Scripts\MonoAlphabetic\MonoAlphabetic_Decryption.cs" />
     <Compile Include="Assets\Scripts\Enigma\Plug.cs" />
+    <Compile Include="Assets\Scripts\MonoAlphabetic\MonoAlphabetic_Cryptology.cs" />
     <Compile Include="Assets\Scripts\Vigenere\Vigenere_Sample.cs" />
+    <Compile Include="Assets\Scripts\Manager\TotalCryptologyManager.cs" />
     <Compile Include="Assets\Scripts\Node\WordNode.cs" />
+    <Compile Include="Assets\Scripts\Vigenere\Vigenere_Decryption.cs" />
     <Compile Include="Assets\Scripts\Enigma\PlugBoard.cs" />
+    <Compile Include="Assets\Scripts\Base\Cryptology_Base.cs" />
     <Compile Include="Assets\Scripts\Vigenere\Vigenere_Encryption.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,11 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
-using TMP_Text = TMPro.TextMeshProUGUI;
 using Unity.VisualScripting;
 using System.Collections;
 using System;
+
+using TMP_Text = TMPro.TextMeshProUGUI;
 
 public class Plug : MonoBehaviour
 {

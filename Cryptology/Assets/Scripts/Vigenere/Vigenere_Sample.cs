@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 
 public class Vigenere_Sample : MonoBehaviour
 {
-    public Vigenere_Encryption encryption;
+    public Vigenere_Cryptology encryption;
 
     #region Open_Private_Fields
     [SerializeField]
@@ -21,21 +21,17 @@ public class Vigenere_Sample : MonoBehaviour
     private TextMeshProUGUI encryptionText;
     #endregion
 
-    #region MonoBehaviour_Callbacks
-    private void Awake()
+    #region Custom_Methods
+    public void Init()
     {
         encryption.sampleTextUpdate = SampleTextUpdate;
     }
-    #endregion
-
-    #region Custom_Methods
     /// <summary>
     /// 샘플 텍스트 업데이트
     /// </summary>
     /// <param name="keyText">키 값</param>
     public void SampleTextUpdate(string keyText)
     {
-        Debug.Log("SampleTextUpdate");
         StringBuilder sb = new StringBuilder();
         int[] keyTextValue = new int[keyText.Length];
         int[] sampleTextValue = new int[sampleText.text.Length];

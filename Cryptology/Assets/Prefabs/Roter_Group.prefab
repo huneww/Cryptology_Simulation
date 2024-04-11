@@ -225,59 +225,7 @@ MonoBehaviour:
   ratchetUpBtn: {fileID: 5262695717056616499}
   ratchetDownBtn: {fileID: 1059855317086824534}
   currentText: {fileID: 4966830519155940414}
-  roterConnectList:
-  - name: 65
-    connect: 75
-  - name: 66
-    connect: 73
-  - name: 67
-    connect: 88
-  - name: 68
-    connect: 70
-  - name: 69
-    connect: 74
-  - name: 70
-    connect: 68
-  - name: 71
-    connect: 85
-  - name: 72
-    connect: 83
-  - name: 73
-    connect: 66
-  - name: 74
-    connect: 69
-  - name: 75
-    connect: 65
-  - name: 76
-    connect: 89
-  - name: 77
-    connect: 86
-  - name: 78
-    connect: 80
-  - name: 79
-    connect: 84
-  - name: 80
-    connect: 78
-  - name: 81
-    connect: 82
-  - name: 82
-    connect: 81
-  - name: 83
-    connect: 72
-  - name: 84
-    connect: 79
-  - name: 85
-    connect: 71
-  - name: 86
-    connect: 77
-  - name: 87
-    connect: 90
-  - name: 88
-    connect: 67
-  - name: 89
-    connect: 76
-  - name: 90
-    connect: 87
+  roterConnectList: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &736073936170482116
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,59 +330,7 @@ MonoBehaviour:
   ratchetUpBtn: {fileID: 4871580851851832156}
   ratchetDownBtn: {fileID: 626358074640296746}
   currentText: {fileID: 5093347948152376650}
-  roterConnectList:
-  - name: 65
-    connect: 71
-  - name: 66
-    connect: 83
-  - name: 67
-    connect: 82
-  - name: 68
-    connect: 79
-  - name: 69
-    connect: 88
-  - name: 70
-    connect: 75
-  - name: 71
-    connect: 65
-  - name: 72
-    connect: 87
-  - name: 73
-    connect: 86
-  - name: 74
-    connect: 77
-  - name: 75
-    connect: 70
-  - name: 76
-    connect: 90
-  - name: 77
-    connect: 74
-  - name: 78
-    connect: 85
-  - name: 79
-    connect: 68
-  - name: 80
-    connect: 89
-  - name: 81
-    connect: 84
-  - name: 82
-    connect: 67
-  - name: 83
-    connect: 66
-  - name: 84
-    connect: 81
-  - name: 85
-    connect: 78
-  - name: 86
-    connect: 73
-  - name: 87
-    connect: 72
-  - name: 88
-    connect: 69
-  - name: 89
-    connect: 80
-  - name: 90
-    connect: 76
+  roterConnectList: 00000000000000000000000000000000000031000000000000000000000000003000000000005200000000000000000000000000
 --- !u!1 &1018501513524286715
 GameObject:
   m_ObjectHideFlags: 0
@@ -4733,59 +4629,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c616ef7aaba114f82437809392791a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roterConnectList:
-  - name: 65
-    connect: 83
-  - name: 66
-    connect: 68
-  - name: 67
-    connect: 73
-  - name: 68
-    connect: 66
-  - name: 69
-    connect: 76
-  - name: 70
-    connect: 79
-  - name: 71
-    connect: 78
-  - name: 72
-    connect: 90
-  - name: 73
-    connect: 67
-  - name: 74
-    connect: 82
-  - name: 75
-    connect: 89
-  - name: 76
-    connect: 69
-  - name: 77
-    connect: 85
-  - name: 78
-    connect: 71
-  - name: 79
-    connect: 70
-  - name: 80
-    connect: 88
-  - name: 81
-    connect: 87
-  - name: 82
-    connect: 74
-  - name: 83
-    connect: 65
-  - name: 84
-    connect: 86
-  - name: 85
-    connect: 77
-  - name: 86
-    connect: 84
-  - name: 87
-    connect: 81
-  - name: 88
-    connect: 80
-  - name: 89
-    connect: 75
-  - name: 90
-    connect: 72
+  roterConnectList: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &8544326947669908058
 GameObject:
   m_ObjectHideFlags: 0
@@ -5266,56 +5110,4 @@ MonoBehaviour:
   ratchetUpBtn: {fileID: 7519548792058362396}
   ratchetDownBtn: {fileID: 7386665421968879041}
   currentText: {fileID: 3175836902192932619}
-  roterConnectList:
-  - name: 65
-    connect: 83
-  - name: 66
-    connect: 68
-  - name: 67
-    connect: 79
-  - name: 68
-    connect: 66
-  - name: 69
-    connect: 75
-  - name: 70
-    connect: 85
-  - name: 71
-    connect: 90
-  - name: 72
-    connect: 78
-  - name: 73
-    connect: 89
-  - name: 74
-    connect: 77
-  - name: 75
-    connect: 69
-  - name: 76
-    connect: 81
-  - name: 77
-    connect: 74
-  - name: 78
-    connect: 72
-  - name: 79
-    connect: 67
-  - name: 80
-    connect: 88
-  - name: 81
-    connect: 76
-  - name: 82
-    connect: 87
-  - name: 83
-    connect: 65
-  - name: 84
-    connect: 86
-  - name: 85
-    connect: 70
-  - name: 86
-    connect: 84
-  - name: 87
-    connect: 82
-  - name: 88
-    connect: 80
-  - name: 89
-    connect: 73
-  - name: 90
-    connect: 71
+  roterConnectList: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
